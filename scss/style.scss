@@ -18,9 +18,27 @@
 
 body{
     @include flexCenter;
+    flex-direction: column;
     height: 100vh;
     max-width: 100vw;
     background-color: $mainColor;
+}
+
+body.menuBody{
+    background-color: $fieldset;
+}
+
+header{
+    font-size: 5rem;
+    font-family: 'Rock Salt', cursive;
+    color: $headerColor;
+    margin-bottom: 50px;
+}
+
+header.menuHeader{
+    font-size: 5rem;
+    position: absolute;
+    top: 150px;
 }
 
 #gameboard{
@@ -38,7 +56,26 @@ body{
         cursor: pointer;
         height: 100%;
         &:hover{
-            background-color: powderblue;
+            background-color: $tertiaryColor;
         }
+    }
+}
+
+fieldset{
+    @include flexCenter();
+    padding: 50px;
+    background-color: $mainColor;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+    .startBtn {
+        display: inline-block;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        color: #ffffff;
+        background-color: $tertiaryColor;
+        border-radius: 6px;
+        outline: none;
     }
 }

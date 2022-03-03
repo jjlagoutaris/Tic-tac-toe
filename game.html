@@ -14,24 +14,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet">
 </head>
 
-<body class="menuBody">
-
-    <header class="menuHeader">
+<body>
+    <header>
         Tic-Tac-Toe
     </header>
-
-    <fieldset>
-        <label for="p1name">P1 Name: 
-            <input type="text" name="p1name" id="p1name" minlength="1" required>
-        </label>
-        
-        <label for="p2name">P2 Name: 
-            <input type="text" name="p2name" id="p2name" minlength="1" required>
-        </label>
-        
-        <a href="game.html" class="startBtn">PLAY</a>
-    </fieldset>
-    <script src="menu.js"></script>
+    <div id="gameboard">
+        <button class="grid-cell cell1"></button>
+        <button class="grid-cell cell2"></button>
+        <button class="grid-cell cell3"></button>
+        <button class="grid-cell cell4"></button>
+        <button class="grid-cell cell5"></button>
+        <button class="grid-cell cell6"></button>
+        <button class="grid-cell cell7"></button>
+        <button class="grid-cell cell8"></button>
+        <button class="grid-cell cell9"></button>
+    </div>
+    <script src="js.js"></script>
 </body>
 
 </html>

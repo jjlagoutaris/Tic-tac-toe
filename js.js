@@ -114,7 +114,7 @@ const gameLoop = ((board) => {
         }
     }
 
-    displayController.setCells();
+    displayController.setCells();  
     clickCells();
 
 })(gameBoard.boardArr);
