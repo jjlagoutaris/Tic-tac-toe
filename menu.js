@@ -1,6 +1,5 @@
-let button = document.querySelector('button');
-
-
+let body = document.querySelector('.menuBody');
+let menuBtn = document.querySelector('.startBtn');
 
 
 // const body = document.querySelector('body');

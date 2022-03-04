@@ -1,12 +1,29 @@
+let p1name = document.querySelector('#p1name');
+let p2name = document.querySelector('#p2name');
+console.log(p1name.value);
 const Player = (symbol) => {
     let score = 0;
+    let name = 'Anonymous';
     const getScore = () => score;
-    return {getScore, symbol};
+    return {getScore, symbol, name};
 };
 
 const setup = () => {
     const playerOne = Player('X');
     const playerTwo = Player('O');
+    if(p1name.value !== ''){
+        playerOne.name = p1name.value;
+    }
+    else{
+        playerOne.name = 'Player One';
+    }
+    if(p2name.value !== ''){
+        playerTwo.name = p2name.value;
+    }
+    else{
+        playerTwo.name = 'Player Two';
+    }
+    
     let turn = 1;
     return {playerOne, playerTwo, turn};
 };
@@ -24,7 +41,6 @@ const displayController = ((board) => {
         for(let i = 0; i < board.length; i++){
             cells[i].textContent = board[i];
             cells[i].setAttribute('data-index', `${i}`);
-            // console.log(cells[i].getAttribute);
         }
     };
     return{setCells};
@@ -107,13 +123,17 @@ const gameLoop = ((board) => {
     const logVictory = () => {
         let outcome = checkGameState();
         if (outcome === 'victory'){
-            console.log(`Player ${details.turn} wins!`);
+            if(details.turn === 1){
+                console.log(`${details.playerOne.name} wins`);
+            }
+            else{
+                console.log(`${details.playerTwo.name} wins`);
+            }
         }
         else if (outcome === 'tie'){
             console.log(`It's a draw`);
         }
     }
-
     displayController.setCells();  
     clickCells();
 
