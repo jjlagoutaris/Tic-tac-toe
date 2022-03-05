@@ -1,30 +1,14 @@
-let p1name = document.querySelector('#p1name');
-let p2name = document.querySelector('#p2name');
-console.log(p1name.value);
-const Player = (symbol) => {
+const Player = (symbol, name) => {
     let score = 0;
-    let name = 'Anonymous';
     const getScore = () => score;
     return {getScore, symbol, name};
 };
 
 const setup = () => {
-    const playerOne = Player('X');
-    const playerTwo = Player('O');
-    if(p1name.value !== ''){
-        playerOne.name = p1name.value;
-    }
-    else{
-        playerOne.name = 'Player One';
-    }
-    if(p2name.value !== ''){
-        playerTwo.name = p2name.value;
-    }
-    else{
-        playerTwo.name = 'Player Two';
-    }
-    
+    const playerOne = Player('X', `Player 1`);
+    const playerTwo = Player('O', `Player 2`);
     let turn = 1;
+
     return {playerOne, playerTwo, turn};
 };
 
@@ -35,7 +19,6 @@ const gameBoard = (() => {
 
 const displayController = ((board) => {
     const cells = document.querySelectorAll('.grid-cell');
-
 
     const setCells = () => {
         for(let i = 0; i < board.length; i++){
@@ -48,7 +31,38 @@ const displayController = ((board) => {
 
 const gameLoop = ((board) => {
     const cells = document.querySelectorAll('.grid-cell');
+    displayController.setCells(); 
+    for(const cell of cells){
+        cell.disabled = true;
+    }
     let details = setup();
+    let startBtn = document.querySelector('.startBtn');
+    let result = document.querySelector('.result');
+    startBtn.addEventListener('click', () => {
+        for(const cell of cells){
+            cell.disabled = false;
+        }
+        let name1 = prompt('P1 Name: ');
+        let name2 = prompt('P2 Name: ');
+        if(name1.length >= 1){
+            details.playerOne.name = name1;
+        }
+        if(name2.length >= 1){
+            details.playerTwo.name = name2;
+        }
+    });
+    let resetBtn = document.querySelector('.resetBtn');
+    resetBtn.addEventListener('click', () => {
+        let i = 0;
+        for(const cell of cells){
+            cell.textContent = '';
+            board[i] = '';
+            i++;
+            details.turn = 1;
+        }
+        i = 0;
+        result.textContent = 'Results: ';
+    });
 
     const clickCells = () => {
         for(const cell of cells){
@@ -124,17 +138,25 @@ const gameLoop = ((board) => {
         let outcome = checkGameState();
         if (outcome === 'victory'){
             if(details.turn === 1){
-                console.log(`${details.playerOne.name} wins`);
+                result.textContent = `Results: ${details.playerOne.name} wins`;
+                // console.log(`${details.playerOne.name} wins`);
+                for(const cell of cells){
+                    cell.disabled = true;
+                }
             }
             else{
-                console.log(`${details.playerTwo.name} wins`);
+                result.textContent = `Results: ${details.playerTwo.name} wins`
+                // console.log(`${details.playerTwo.name} wins`);
+                for(const cell of cells){
+                    cell.disabled = true;
+                }
             }
         }
         else if (outcome === 'tie'){
-            console.log(`It's a draw`);
+            result.textContent = `It's a draw`;
+            // console.log(`It's a draw`);
         }
     }
-    displayController.setCells();  
     clickCells();
 
 })(gameBoard.boardArr);
